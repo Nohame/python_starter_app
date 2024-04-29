@@ -1,0 +1,26 @@
+version: '3.8'
+
+# DEVELOPMENT
+services:
+  # Python Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_NAME: ${APP_NAME:-python_app}
+        PYTHON_VERSION: ${PYTHON_VERSION:-3.12}
+    container_name: ${APP_NAME:-python_app}
+    ports:
+      - ${APP_HOST:-0.0.0.0}:${APP_PORT:-8080}:${APP_PORT:-8080}
+    volumes:
+      - ./:/usr/src/app
+      - ~/.ssh:/root/.ssh
+    command: >
+      bash -c "
+      tail -f /usr/src/app/stay.txt"
+
+networks:
+  default:
+    name: ${NETWORK:-python_network}
+    external: true

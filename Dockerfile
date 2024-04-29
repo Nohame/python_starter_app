@@ -17,7 +17,7 @@ RUN apt-get update -y && apt-get install -y \
     rsync \
     nano \
     screen \
-    && rm -rf /var/lib/apt/lists/*  # Nettoyage du cache d'APT pour réduire la taille de l'image
+    && rm -rf /var/lib/apt/lists/*
 
 RUN echo "alias ll='ls -lisa'" >> ~/.bashrc
 
